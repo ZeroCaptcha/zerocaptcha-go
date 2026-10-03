@@ -289,7 +289,7 @@ func TestAWaitThatRunsOutIsAWaitTimeoutError(t *testing.T) {
 	}
 }
 
-// Codex review finding 5: the deadline was checked only after a read finished.
+// Regression: the deadline was checked only after a read finished.
 func TestASlowReadDoesNotCarryTheWaitPastItsDeadline(t *testing.T) {
 	api := newStandIn(t)
 	c := client(t, api)
@@ -333,7 +333,7 @@ func TestARetryAfterLongerThanTheTimeLeftEndsTheWaitAtOnce(t *testing.T) {
 	}
 }
 
-// Codex review finding 6: a body that could not be read was not retried, so a task the API made
+// Regression: a body that could not be read was not retried, so a task the API made
 // surfaced as an error, and calling again made a second, paid task.
 func TestAnAnswerCutShortIsRetriedWithTheSameKeyAndMakesOneTask(t *testing.T) {
 	api := newStandIn(t)
